@@ -49,10 +49,22 @@ elif choice == "Find R from T, u, θ":
 
 elif choice == "Find T from R, u, θ":
     R = st.number_input("Range R", min_value=0.0, value=100.0)
-    T = R / (u * math.cos(theta))
-    st.success(f"T = {T:.4f}")
+
+    denominator = u * math.cos(theta)
+
+    if denominator <= 0:
+        st.error("Initial speed and cos(θ) must be greater than zero.")
+    else:
+        T = R / denominator
+        st.success(f"T = {T:.4f} seconds")
 
 elif choice == "Find T from H, u, θ":
-    H = st.number_input("Height H", min_value=0.0, value=25.0)
-    T = (4 * H) / (u * math.sin(theta))
-    st.success(f"T = {T:.4f}")
+    H = st.number_input("Maximum height H", min_value=0.0, value=25.0)
+
+    denominator = u * math.sin(theta)
+
+    if denominator <= 0:
+        st.error("Initial speed and sin(θ) must be greater than zero.")
+    else:
+        T = (4 * H) / denominator
+        st.success(f"T = {T:.4f} seconds")
